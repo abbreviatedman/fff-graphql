@@ -1,25 +1,27 @@
-import {
+const {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
-} from 'graphql'
+} = require('graphql',)
 
 const fetch = require('node-fetch',)
 const util = require('util',)
 const { parseString, } = require('xml2js',)
 
-const parseXML = util.promisify(parseString,)
 const API_KEY = '9dJimr5lVjOx8knHCjMGtw'
-const DUMMY_URI = `https://www.goodreads.com/author/show.xml?id=4432&key=${API_KEY}`
 
-// const dummyData = fetch(DUMMY_URI)
-//   .then(response => response.text())
-//   .then(parseXML)
+const parseXML = util.promisify(parseString,)
 
-const AuthorType = new GraphQLSchema({
+const AuthorType = new GraphQLObjectType({
   name: 'Author',
   description: '', // TODO: add desc.
+  fields: () => ({
+    name: {
+      type: GraphQLString,
+      resolve: (xml,) => xml.GoodreadsResponse.author[0].name[0],
+    },
+  }),
 },)
 
 const schema = new GraphQLSchema({
@@ -34,6 +36,14 @@ const schema = new GraphQLSchema({
             type: GraphQLInt,
           },
         },
+        resolve: (parentValue, args,) =>
+          fetch(
+            `https://www.goodreads.com/author/show.xml?id=${
+              args.id
+            }&key=${API_KEY}`,
+          )
+            .then((response,) => response.text(),)
+            .then(parseXML,),
       },
     }),
   },),

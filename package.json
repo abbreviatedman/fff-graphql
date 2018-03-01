@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p && nodemon server.js",
     "precommit": "lint-staged",
     "format": "prettier --write",
     "lint": "./node_modules/.bin/eslint --fix -c './eslintPrecommit/.eslintrc-precommit.json'"
@@ -39,6 +39,7 @@
     "eslint-config-babel": "^7.0.2",
     "eslint-config-import": "^0.13.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
@@ -50,6 +51,7 @@
     "graphiql": "^0.11.11",
     "graphql": "^0.13.1",
     "node-fetch": "^2.0.0",
+    "nodemon": "^1.17.1",
     "xml2js": "^0.4.19"
   }
 }
