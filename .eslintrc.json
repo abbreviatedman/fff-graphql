@@ -1,0 +1,42 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": ["prettier", "prettier/react"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "babel",
+    "import"
+  ],
+  "rules": {
+    "array-callback-return": "error",
+    "eqeqeq": "error",
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "import/no-mutable-exports": "error",
+    "import/no-webpack-loader-syntax": "error",
+    "linebreak-style": ["error", "unix"],
+    "no-eval": "error",
+    "no-const-assign": "error",
+    "no-loop-func": "error",
+    "no-multi-assign": "error",
+    "no-new-wrappers": "error",
+    "no-param-reassign": ["error", { "props": true }],
+    "no-var": "error",
+    "no-undef": ["error", { "typeof": true }],
+    "prefer-const": "error",
+    "react/no-is-mounted": "error",
+    "react/require-render-return": "error",
+    "quote-props": ["error", "consistent-as-needed", {"keywords": true}],
+    "wrap-iife": "error"
+  }
+}
